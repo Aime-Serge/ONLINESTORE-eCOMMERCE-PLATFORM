@@ -42,7 +42,7 @@ export const fetchProducts = createAsyncThunk<
     if (search) params.append('q', search);
     if (sort) params.append('sort', sort);
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?${params.toString()}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products/?${params.toString()}`);
     if (!res.ok) throw new Error('Failed to fetch products');
 
     const data = await res.json();

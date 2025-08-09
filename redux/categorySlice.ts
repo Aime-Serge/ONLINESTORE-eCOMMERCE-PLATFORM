@@ -18,14 +18,22 @@ const initialState: CategoryState = {
   status: 'idle',
 };
 
-export const fetchCategories = createAsyncThunk(
+{/*export const fetchCategories = createAsyncThunk(
   'fetchCategories',
   async () => {
     const response = await api.get('/categories');
     // API already returns array in correct shape
     return response.data as Category[];
   }
+);*/}
+export const fetchCategories = createAsyncThunk(
+  'fetchCategories',
+  async () => {
+    const response = await api.get('/categories/');
+    return response.data.results as Category[];
+  }
 );
+
 
 const categorySlice = createSlice({
   name: 'categories',
