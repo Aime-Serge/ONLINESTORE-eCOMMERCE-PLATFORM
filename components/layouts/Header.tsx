@@ -18,20 +18,40 @@ const Header: React.FC = () => {
           <Image
             src="/images/logo.png"
             alt="S&G Fast and Easy Buy"
-            width={40}
-            height={40}
+            width={100}
+            height={100}
             className="rounded-full"
           />
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-6">
-          <Link href="/" className="text-gray-700 hover:text-black">Home</Link>
-          <Link href="/products" className="text-gray-700 hover:text-black">Products</Link>
-          <Link href="/cart" className="text-gray-700 hover:text-black">Cart</Link>
-          <Link href="/about" className="text-gray-700 hover:text-black">About</Link>
-          <Link href="/contact" className="text-gray-700 hover:text-black">Contact</Link>
+        <div className="div">
+        <nav className="hidden md:flex space-x-6 cols-2">
+           <ul className="">
+            <li>
+              <Link href="/" className="text-gray-700 hover:text-black">Home</Link>
+            </li>
+            <li>
+              <Link href="/ProductList" className="text-gray-700 hover:text-black">Products</Link>
+            </li>
+            <li>
+              <Link href="/cart" className="text-gray-700 hover:text-black">Cart</Link>
+            </li>
+          </ul>
+          <ul className="position-relative">
+            <li>
+              <Link href="/checkout" className="text-gray-700 hover:text-black">Checkout</Link>
+            </li>
+            <li>
+              <Link href="/login" className="text-gray-700 hover:text-black">Profile</Link>
+            </li>
+            
+            <li>
+              <Link href="/orders" className="text-gray-700 hover:text-black">Orders</Link>
+            </li>
+            </ul>
         </nav>
+        </div>
 
         {/* Mobile Menu Button */}
         <button className="md:hidden" onClick={toggleMenu}>
@@ -46,8 +66,9 @@ const Header: React.FC = () => {
             <Link href="/" className="text-gray-700 hover:text-black" onClick={toggleMenu}>Home</Link>
             <Link href="/products" className="text-gray-700 hover:text-black" onClick={toggleMenu}>Products</Link>
             <Link href="/cart" className="text-gray-700 hover:text-black" onClick={toggleMenu}>Cart</Link>
-            <Link href="/about" className="text-gray-700 hover:text-black" onClick={toggleMenu}>About</Link>
-            <Link href="/contact" className="text-gray-700 hover:text-black" onClick={toggleMenu}>Contact</Link>
+            <Link href="/checkout" className="text-gray-700 hover:text-black" onClick={toggleMenu}>Checkout</Link>
+            <Link href="/orders" className="text-gray-700 hover:text-black" onClick={toggleMenu}>Orders</Link>
+            <Link href="/login" className="text-gray-700 hover:text-black" onClick={toggleMenu}>Login</Link>
           </nav>
         </div>
       )}

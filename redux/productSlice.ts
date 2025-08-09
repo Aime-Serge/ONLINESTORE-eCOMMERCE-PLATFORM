@@ -1,10 +1,7 @@
 // redux/productSlice.ts
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import api from '../services/api';
 import { Product } from '../types/product';
-import { RootState } from '../redux/store';
 
-// Add filter and price range types if needed
 interface ProductsState {
   items: Product[];
   status: 'idle' | 'loading' | 'failed';
@@ -25,33 +22,36 @@ const initialState: ProductsState = {
   priceRangeFilter: null,
 };
 
-
+// Updated fetchProducts to take explicit args
 export const fetchProducts = createAsyncThunk<
   { products: Product[]; totalPages: number },
-  void,
-  { state: RootState }
->('products/fetchProducts', async (_, { getState }) => {
-  const { products, pagination, filter } = getState() as RootState;
-  const params: Record<string, string | number> = {
-    page: (pagination as unknown as { page: number }).page,
-    limit: 12,
-  };
+  { page?: number; categoryId?: string; minPrice?: number; maxPrice?: number; search?: string; sort?: string }
+>(
+  'products/fetchProducts',
+  async ({ page, categoryId, minPrice, maxPrice, search, sort }) => {
+    const params = new URLSearchParams();
 
-  // Use filters from products state if available
-  if (products.categoryFilter) params.category = products.categoryFilter;
-  if (products.priceRangeFilter) {
-    params.min_price = products.priceRangeFilter.min;
-    params.max_price = products.priceRangeFilter.max;
+    // Required pagination params
+    if (page) params.append('page', page.toString());
+    params.append('limit', '12');
+
+    // Optional filters
+    if (categoryId) params.append('category', categoryId);
+    if (minPrice !== undefined) params.append('min_price', minPrice.toString());
+    if (maxPrice !== undefined) params.append('max_price', maxPrice.toString());
+    if (search) params.append('q', search);
+    if (sort) params.append('sort', sort);
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products?${params.toString()}`);
+    if (!res.ok) throw new Error('Failed to fetch products');
+
+    const data = await res.json();
+    return {
+      products: data.products,
+      totalPages: data.totalPages,
+    };
   }
-  if (filter?.searchQuery) params.q = filter.searchQuery;
-  if (filter?.sortBy) params.sort = filter.sortBy;
-
-  const response = await api.get('/products', { params });
-  return {
-    products: response.data.products,
-    totalPages: response.data.totalPages,
-  };
-});
+);
 
 const productSlice = createSlice({
   name: 'products',
@@ -107,3 +107,4 @@ export const {
 } = productSlice.actions;
 
 export default productSlice.reducer;
+// redux/store.ts

@@ -88,6 +88,7 @@ export default function ProductDetailsPage() {
         const response = await fetch(`/api/products?limit=12/${id}`);
         if (!response.ok) throw new Error('Failed to fetch product.');
         const data = await response.json();
+        console.log(data)
         setProduct(data);
       } catch (err) {
         setError((err as Error).message);

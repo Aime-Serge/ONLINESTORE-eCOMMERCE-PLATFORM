@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../redux/authSlice';
 import { AppDispatch, RootState } from '../redux/store';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const LoginPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
-  const auth = useSelector((state: RootState) => state.auth);
+  const auth = useSelector((state: RootState) => state.auth) as { status: string, error?: string | null };
 
   const [form, setForm] = useState({ email: '', password: '' });
 
@@ -68,6 +69,9 @@ const LoginPage: React.FC = () => {
           auth.status === 'loading' ? 'Logging in...' : 'Login'
           }
         </button>
+        <p className="text-xl mt-2">
+          Do not have an account? <Link href="/signup" className="text-green-600-xl hover:underline">Register</Link>
+          </p>
       </form>
     </section>
   );
