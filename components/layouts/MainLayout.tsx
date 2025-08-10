@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import Header from '@/components/common/Header'; // Ensure this file exists
-import Footer from '@/components/common/Footer'; // We'll add this too
+import Header from '@/components/common/Header';
+import Footer from '@/components/common/Footer';
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -14,8 +14,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       {/* Header */}
       <Header />
 
-      {/* Page Content */}
-      <main className="flex-1 container mx-auto px-4">{children}</main>
+      {/* Main content */}
+      <main className="flex-grow">
+        {children}
+      </main>
 
       {/* Footer */}
       <Footer />
