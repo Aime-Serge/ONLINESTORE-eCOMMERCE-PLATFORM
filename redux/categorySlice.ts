@@ -18,7 +18,7 @@ const initialState: CategoryState = {
   status: 'idle',
 };
 
-{/*export const fetchCategories = createAsyncThunk(
+{/*export const fetchC2ategories = createAsyncThunk(
   'fetchCategories',
   async () => {
     const response = await api.get('/categories');
@@ -27,9 +27,10 @@ const initialState: CategoryState = {
   }
 );*/}
 export const fetchCategories = createAsyncThunk(
-  'fetchCategories',
-  async () => {
-    const response = await api.get('/categories/');
+  'categories/fetchCategories',
+  async (category_id: string) => {
+    {/*const response = await api.get('/categories/');*/}
+    const response = await api.get(`/products?category=${category_id}`);
     return response.data.results as Category[];
   }
 );

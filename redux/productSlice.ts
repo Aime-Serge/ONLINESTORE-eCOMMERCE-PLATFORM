@@ -142,7 +142,9 @@ export const fetchProducts = createAsyncThunk<
   'products/fetchProducts',
   async ({ page, categoryId }, { rejectWithValue }) => {
     try {
-      const response = await api.get('/products', {
+      {/*const response = await api.get('/products'*/}
+      const response = await api.get(`/products?category=${categoryId}`
+, {
         params: { page, categoryId },
       });
 

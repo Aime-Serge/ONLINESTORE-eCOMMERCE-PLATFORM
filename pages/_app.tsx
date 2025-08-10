@@ -9,7 +9,7 @@ function AppWrapper({ children }: { children: React.ReactNode }) {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(fetchCategories());
+    dispatch(fetchCategories(''));
   }, [dispatch]);
 
   return <>{children}</>;
