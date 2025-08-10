@@ -4,9 +4,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts, setPage } from '@/redux/productSlice';
 import { RootState, AppDispatch } from '@/redux/store';
-import ProductCard from './ProductCard';
-import Pagination from './Pagination';
-import SearchFilterBar from './SearchFilterBar';
+import ProductCard from '../components/common/ProductCard';
+import Pagination from '../components/common/Pagination';
+import SearchFilterBar from '../components/common/SearchFilterBar';
 
 const ProductList: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -39,7 +39,7 @@ const ProductList: React.FC = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
         {(items || []).map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.product_id} product={product} />
         ))}
       </div>
 

@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/redux/store';
-import  {setCategoryFilter, setPriceRangeFilter, clearFilters } from '@/redux/productSlice';
+import { setCategoryFilter, setPriceRangeFilter, clearFilters } from '@/redux/productSlice';
 
 const ProductFilters: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -78,3 +78,6 @@ const ProductFilters: React.FC = () => {
 };
 
 export default ProductFilters;
+
+
+

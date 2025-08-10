@@ -1,8 +1,8 @@
 import React from 'react';
 import Head from 'next/head';
-import Header from '@/components/layouts/Header';
-import Footer from '@/components/layouts/Footer';
-import ProductList from '@/components/common/ProductList';
+import Header from '@/components/common/Header';
+import Footer from '@/components/common/Footer';
+import ProductList from '@/pages/ProductList';
 
 
 

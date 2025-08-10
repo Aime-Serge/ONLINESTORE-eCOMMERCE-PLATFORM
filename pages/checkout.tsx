@@ -33,7 +33,7 @@ const CheckoutPage: React.FC = () => {
           <ul className="mb-6">
             {cartItems.map((item) => (
               <li key={item.id}>
-                {item.name} x {item.quantity} = ${(item.price * item.quantity).toFixed(2)}
+                {item.product.name} x {item.quantity} = ${(item.price * item.quantity).toFixed(2)}
               </li>
             ))}
           </ul>

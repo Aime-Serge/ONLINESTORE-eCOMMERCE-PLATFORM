@@ -1,29 +1,54 @@
 'use client';
-import { Product } from '@/types/product';
+
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { Product } from '@/types/product';
+import { addToCart } from '@/redux/cartSlice';
 import Image from 'next/image';
+
 interface ProductCardProps {
   product: Product;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const dispatch = useDispatch();
+  const productPrice = Number(product.price); // ensure number for .toFixed()
+  const productImage = product.primary_image; // match backend key
+
   return (
-    <article className="border rounded shadow hover:shadow-lg transition p-4 flex flex-col">
-      <Image
-        src={product.image}
-        alt={product.name}
-        className="object-cover h-48 w-full rounded mb-4"
-      />
-      <h3 className="text-lg font-semibold mb-2">{product.description}</h3>
-      <p className="text-gray-700 mb-4">${product.price.toFixed(2)}</p>
+    <div className="border rounded-lg p-4 flex flex-col">
+      {productImage && (
+        <Image
+          src={productImage}
+          alt={product.name}
+          width={400}
+          height={300}
+          className="w-full h-48 object-cover rounded-md"
+        />
+      )}
+      <h3 className="mt-2 font-semibold text-lg">{product.name}</h3>
+      {product.description && (
+        <p className="text-gray-500 text-sm">{product.description}</p>
+      )}
+      <p className="mt-2 font-bold">${productPrice.toFixed(2)}</p>
+
       <button
-        type="button"
-        className="mt-auto bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+        onClick={() =>
+          dispatch(
+            addToCart({
+              product,
+              quantity: 1,
+              // store numeric price in cart 
+            })
+          )
+        }
+        className="mt-auto bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md"
       >
         Add to Cart
       </button>
-    </article>
+    </div>
   );
 };
 
 export default ProductCard;
+// /components/common/ProductCard.tsx

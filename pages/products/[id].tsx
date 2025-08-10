@@ -109,7 +109,7 @@ export default function ProductDetailsPage() {
       <div className="max-w-6xl mx-auto p-6 grid md:grid-cols-2 gap-10">
         <div>
           <Image
-            src={product.image}
+            src={product.primary_image || '/placeholder.png'} // Fallback image
             alt={product.name}
             width={500}
             height={500}

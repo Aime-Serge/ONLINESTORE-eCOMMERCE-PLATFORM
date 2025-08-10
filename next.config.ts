@@ -1,11 +1,21 @@
-import type { NextConfig } from "next";
+// next.config.js
 
-const nextConfig: NextConfig = {
-  /* config options here */
+const nextConfig = {
   reactStrictMode: true,
-};
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'placekitten.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
+}
 
-export default nextConfig;
+module.exports = nextConfig
+
 //changes to next.config.ts to handle API proxying
 // This configuration allows you to proxy API requests to a different server
 // without exposing the API URL in your frontend code.
