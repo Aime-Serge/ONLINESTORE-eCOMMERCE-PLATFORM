@@ -7,7 +7,6 @@ import { RootState, AppDispatch } from '@/redux/store';
 import ProductCard from '../components/common/ProductCard';
 import Pagination from '../components/common/Pagination';
 import SearchFilterBar from '../components/common/SearchFilterBar';
-import MainLayout from '@/components/layouts/MainLayout';
 
 const ProductList: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -32,8 +31,6 @@ const ProductList: React.FC = () => {
   };
 
   return (
-    <MainLayout>
-    {/*<section className="container mx-auto p-4">*/}
     <section className="container mx-auto p-4">
       <SearchFilterBar categories={categories} onCategoryChange={handleCategoryChange} />
 
@@ -48,7 +45,6 @@ const ProductList: React.FC = () => {
 
       <Pagination currentPage={page} totalPages={totalPages} onPageChange={handlePageChange} />
     </section>
-    </MainLayout>
   );
 };
 

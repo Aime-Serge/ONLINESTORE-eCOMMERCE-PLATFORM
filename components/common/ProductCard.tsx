@@ -16,7 +16,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const productImage = product.primary_image; // match backend key
 
   return (
-    <div className="border rounded-lg p-4 flex flex-col">
+    <div className="bg-lightblue-200 border rounded-lg p-4 flex flex-col">
       {productImage && (
         <Image
           src={productImage}
