@@ -136,16 +136,16 @@ const initialState: ProductState = {
 // ✅ Fixed to use backend's "results" and "meta.page_count"
 export const fetchProducts = createAsyncThunk<
   { products: Product[]; totalPages: number },
-  { page: number; categoryId?: string },
+  { page: number; category_id?: string },
   { rejectValue: string }
 >(
   'products/fetchProducts',
-  async ({ page, categoryId }, { rejectWithValue }) => {
+  async ({ page, category_id }, { rejectWithValue }) => {
     try {
       {/*const response = await api.get('/products'*/}
-      const response = await api.get(`/products?category=${categoryId}`
+      const response = await api.get(`/products?category=${category_id}`
 , {
-        params: { page, categoryId },
+        params: { page, category_id },
       });
 
       return {

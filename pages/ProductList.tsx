@@ -19,7 +19,7 @@ const ProductList: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   useEffect(() => {
-    dispatch(fetchProducts({ page, categoryId: selectedCategory || undefined }));
+    dispatch(fetchProducts({ page, category_id: selectedCategory || undefined }));
   }, [dispatch, page, selectedCategory]);
 
   const handlePageChange = (newPage: number) => {
