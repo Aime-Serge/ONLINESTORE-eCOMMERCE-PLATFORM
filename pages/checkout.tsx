@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
+import MainLayout from '../components/layouts/MainLayout';
 
 const CheckoutPage: React.FC = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -23,6 +24,7 @@ const CheckoutPage: React.FC = () => {
   };
 
   return (
+    <MainLayout>
     <section className="max-w-3xl mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6">Checkout</h1>
 
@@ -112,6 +114,7 @@ const CheckoutPage: React.FC = () => {
         </>
       )}
     </section>
+    </MainLayout>
   );
 };
 

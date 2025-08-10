@@ -4,6 +4,7 @@ import { loginUser } from '../redux/authSlice';
 import { AppDispatch, RootState } from '../redux/store';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import MainLayout from '../components/layouts/MainLayout';
 
 const LoginPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -26,6 +27,8 @@ const LoginPage: React.FC = () => {
   };
 
   return (
+    <MainLayout>
+    {/*<section className="container mx-auto p-4">*/}
     <section className="max-w-md mx-auto mt-12 p-6 border rounded shadow">
       <h1 className="text-2xl font-bold mb-4">Login</h1>
       {auth.status === 'failed' && (
@@ -74,6 +77,7 @@ const LoginPage: React.FC = () => {
           </p>
       </form>
     </section>
+    </MainLayout>
   );
 };
 

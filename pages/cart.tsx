@@ -90,27 +90,30 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import CartItem from '@/components/common/CartItem';
 import CartSummary from '@/components/cart/CartSummary';
+import MainLayout from '@/components/layouts/MainLayout';
 
 const CartPage: React.FC = () => {
   const items = useSelector((state: RootState) => state.cart.items);
 
   return (
-    <section className="max-w-6xl mx-auto p-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div className="md:col-span-2">
-        <h1 className="text-3xl font-bold mb-6">Your Cart</h1>
-        {items.length === 0 ? (
-          <p>Your cart is empty.</p>
-        ) : (
-          <ul className="space-y-4">
-            {items.map((item) => (
-              <CartItem key={item.id} item={item} />
-            ))}
-          </ul>
-        )}
-      </div>
+    <MainLayout>
+      <section className="max-w-6xl mx-auto p-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="md:col-span-2">
+          <h1 className="text-3xl font-bold mb-6">Your Cart</h1>
+          {items.length === 0 ? (
+            <p>Your cart is empty.</p>
+          ) : (
+            <ul className="space-y-4">
+              {items.map((item) => (
+                <CartItem key={item.id} item={item} />
+              ))}
+            </ul>
+          )}
+        </div>
 
-      <CartSummary />
-    </section>
+        <CartSummary />
+      </section>
+    </MainLayout>
   );
 };
 

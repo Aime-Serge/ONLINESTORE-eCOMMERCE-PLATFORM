@@ -1,6 +1,7 @@
 import React, { useState } from 'react'; 
 import api from '../services/api';
 import { useRouter } from 'next/router';
+import MainLayout from '../components/layouts/MainLayout';
 
 const SignupPage: React.FC = () => {
   const router = useRouter();
@@ -20,7 +21,7 @@ const SignupPage: React.FC = () => {
   // Ensure phone number is a valid format
   // Helper to format DRF errors safely
 
-  
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -46,6 +47,7 @@ const SignupPage: React.FC = () => {
   };
 
   return (
+    <MainLayout>
     <section className="max-w-md mx-auto mt-12 p-6 border rounded shadow">
       <h1 className="text-2xl font-bold mb-4">Create a User Profile</h1>
 
@@ -124,6 +126,7 @@ const SignupPage: React.FC = () => {
         </button>
       </form>
     </section>
+    </MainLayout>
   );
 };
 
