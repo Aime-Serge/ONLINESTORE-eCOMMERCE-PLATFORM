@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import api from '../services/api';
 
 export interface Category {
-  category_id: string;
+ category_id: string;
   name: string;
   description: string;
   created_at: string;

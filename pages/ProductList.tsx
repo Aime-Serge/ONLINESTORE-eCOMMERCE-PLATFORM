@@ -8,6 +8,7 @@ import ProductCard from '../components/common/ProductCard';
 import Pagination from '../components/common/Pagination';
 import SearchFilterBar from '../components/common/SearchFilterBar';
 
+import MainLayout from '../components/layouts/MainLayout';
 const ProductList: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { items, status, error, totalPages, page } = useSelector((state: RootState) => state.products);
@@ -31,6 +32,7 @@ const ProductList: React.FC = () => {
   };
 
   return (
+    <MainLayout>
     <section className="container mx-auto p-4">
       <SearchFilterBar categories={categories} onCategoryChange={handleCategoryChange} />
 
@@ -45,6 +47,7 @@ const ProductList: React.FC = () => {
 
       <Pagination currentPage={page} totalPages={totalPages} onPageChange={handlePageChange} />
     </section>
+    </MainLayout>
   );
 };
 
