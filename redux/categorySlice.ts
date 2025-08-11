@@ -11,29 +11,32 @@ export interface Category {
 interface CategoryState {
   categories: Category[];
   status: 'idle' | 'loading' | 'failed';
+  error: string | null;
 }
 
 const initialState: CategoryState = {
   categories: [],
   status: 'idle',
+  error: null,
 };
 
-{/*export const fetchCategories = createAsyncThunk(
-  'fetchCategories',
-  async () => {
-    const response = await api.get('/categories');
-    // API already returns array in correct shape
-    return response.data as Category[];
-  }
-);*/}
-export const fetchCategories = createAsyncThunk(
-  'fetchCategories',
-  async () => {
-    const response = await api.get('/categories/');
-    return response.data.results as Category[];
+// ✅ Fetch categories from backend and normalize shape
+export const fetchCategories = createAsyncThunk<Category[], void, { rejectValue: string }>(
+  'categories/fetchCategories',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.get('/categories/');
+      const data = Array.isArray(response.data.results)
+        ? response.data.results
+        : [];
+
+      return data as Category[];
+    } catch (err: unknown) {
+      if (err instanceof Error) return rejectWithValue(err.message);
+      return rejectWithValue('Failed to fetch categories');
+    }
   }
 );
-
 
 const categorySlice = createSlice({
   name: 'categories',
@@ -43,14 +46,16 @@ const categorySlice = createSlice({
     builder
       .addCase(fetchCategories.pending, (state) => {
         state.status = 'loading';
+        state.error = null;
       })
       .addCase(fetchCategories.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.categories = action.payload || []; // fallback to empty array
+        state.categories = action.payload;
       })
-      .addCase(fetchCategories.rejected, (state) => {
+      .addCase(fetchCategories.rejected, (state, action) => {
         state.status = 'failed';
-        state.categories = []; // ensure safe fallback
+        state.error = action.payload ?? 'Unknown error';
+        state.categories = [];
       });
   },
 });

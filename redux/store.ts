@@ -1,21 +1,21 @@
 import { configureStore } from '@reduxjs/toolkit';
 import productReducer from './productSlice';
-import paginationReducer from './paginationSlice';
-import filterReducer from './filterSlice';
 import categoryReducer from './categorySlice';
-import cartReducer from './cartSlice'; // <-- Add this import
+import filterReducer from './filterSlice';
+import paginationReducer from './paginationSlice';
+import cartReducer from './cartSlice';
 import authReducer from './authSlice';
+
 export const store = configureStore({
   reducer: {
     products: productReducer,
-    pagination: paginationReducer,
-    filter: filterReducer,
     categories: categoryReducer,
-    cart: cartReducer, // <-- Add this line
+    filters: filterReducer,
+    pagination: paginationReducer,
+    cart: cartReducer,
     auth: authReducer,
   },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
-export default store;

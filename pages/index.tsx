@@ -24,12 +24,12 @@ export default function Home() {
           <h1 className="text-4xl font-extrabold text-gray-900 mb-4">
             Welcome to S&G Fast and Easy Buy
           </h1>
-          <h2 className="text-xl font-medium text-gray-700 mb-8">
+          <h2 className="text-xl font-medium text-gray-700 mb-8 py-3rem">
             Your one-stop shop for all your needs – online, fast, and easy!
           </h2>
 
           {/* Icon Row */}
-          <div className="flex justify-center gap-10 mb-10">
+          <div className="flex justify-center gap-10 mb-10 py-3rem">
             <div className="flex flex-col items-center">
               <ShoppingCart className="w-12 h-12 text-red-500 mb-2" />
               <p className="text-gray-700 font-semibold">Easy Shopping</p>

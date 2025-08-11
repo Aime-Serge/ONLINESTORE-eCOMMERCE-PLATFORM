@@ -21,7 +21,7 @@ const LoginPage: React.FC = () => {
     e.preventDefault();
     dispatch(loginUser(form)).then((res: { meta: { requestStatus: string } }) => {
       if (res.meta.requestStatus === 'fulfilled') {
-        router.push('/');
+        router.push('/auth/login');
       }
     });
   };
