@@ -13,9 +13,13 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const dispatch = useDispatch();
+  const baseImageUrl = 'https://minio.sakachris.com/product-images/products/';
   const productPrice = Number(product.price); // ensure number for .toFixed()
-  const productImage = product.primary_image; // match backend key
-
+  const productImage = product.primary_image
+    ? product.primary_image.startsWith('http')
+      ? product.primary_image
+      : `${baseImageUrl}${product.primary_image}`
+    : '';
   return (
     <>
     <Head>
@@ -29,7 +33,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     <div className="bg-lightblue-200 border rounded-lg p-4 flex flex-col">
       {productImage && (
         <Image
-          src={"https://minio.sakachris.com/product-images/products"}
+          src={productImage}
           alt={product.name}
           width={400}
           height={300}
