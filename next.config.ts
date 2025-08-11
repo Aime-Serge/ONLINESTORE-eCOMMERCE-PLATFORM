@@ -1,6 +1,6 @@
 // next.config.js
 
-const nextConfig = {
+{/*const nextConfig = {
   reactStrictMode: true,
   images: {
     remotePatterns: [
@@ -14,7 +14,20 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = nextConfig*/}
+// next.config.js
+module.exports = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'minio.sakachris.com',
+        pathname: '/product-images/products/**',
+      },
+    ],
+  },
+};
+
 
 //changes to next.config.ts to handle API proxying
 // This configuration allows you to proxy API requests to a different server
