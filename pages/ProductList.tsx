@@ -44,7 +44,7 @@ const ProductList: React.FC = () => {
           </Head>
     <MainLayout>
     <section className="container mx-auto p-4">
-  6    <SearchFilterBar categories={categories} onCategoryChange={handleCategoryChange} />
+     <SearchFilterBar categories={categories} onCategoryChange={handleCategoryChange} />
 
       {status === 'loading' && <p>Loading products...</p>}
       {status === 'failed' && <p className="text-red-600">Error: {error}</p>}

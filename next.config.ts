@@ -16,17 +16,22 @@
 
 module.exports = nextConfig*/}
 // next.config.js
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   images: {
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'minio.sakachris.com',
+        port: '', // leave empty if no custom port
         pathname: '/product-images/products/**',
       },
     ],
   },
 };
+
+module.exports = nextConfig;
+
 
 
 //changes to next.config.ts to handle API proxying
