@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import MainLayout from '../components/layouts/MainLayout';
+import Head from 'next/head';
 
 const CheckoutPage: React.FC = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -24,6 +25,15 @@ const CheckoutPage: React.FC = () => {
   };
 
   return (
+    <>
+    <Head>
+            <title>S&G Fast and Easy Buy | Online Products Stock</title>
+            <meta
+              name="description"
+              content="Fast and Easy Online Shopping Platform"
+            />
+            <link rel="icon" href="/images/logo.png" />
+          </Head>
     <MainLayout>
     <section className="max-w-3xl mx-auto p-4">
       <h1 className="text-3xl font-bold mb-6">Checkout</h1>
@@ -115,6 +125,7 @@ const CheckoutPage: React.FC = () => {
       )}
     </section>
     </MainLayout>
+    </>
   );
 };
 

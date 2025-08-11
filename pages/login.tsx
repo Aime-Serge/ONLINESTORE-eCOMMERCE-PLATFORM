@@ -5,6 +5,7 @@ import { AppDispatch, RootState } from '../redux/store';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import MainLayout from '../components/layouts/MainLayout';
+import Head from 'next/head';
 
 const LoginPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -27,6 +28,15 @@ const LoginPage: React.FC = () => {
   };
 
   return (
+    <>
+    <Head>
+            <title>S&G Fast and Easy Buy | Online Products Stock</title>
+            <meta
+              name="description"
+              content="Fast and Easy Online Shopping Platform"
+            />
+            <link rel="icon" href="/images/logo.png" />
+          </Head>
     <MainLayout>
     {/*<section className="container mx-auto p-4">*/}
     <section className="max-w-md mx-auto mt-12 p-6 border rounded shadow">
@@ -78,6 +88,7 @@ const LoginPage: React.FC = () => {
       </form>
     </section>
     </MainLayout>
+    </>
   );
 };
 

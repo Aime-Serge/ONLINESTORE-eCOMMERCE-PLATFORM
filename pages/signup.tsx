@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import api from '../services/api';
 import { useRouter } from 'next/router';
 import MainLayout from '../components/layouts/MainLayout';
+import Head from 'next/head';
 
 const SignupPage: React.FC = () => {
   const router = useRouter();
@@ -47,6 +48,15 @@ const SignupPage: React.FC = () => {
   };
 
   return (
+    <>
+    <Head>
+            <title>S&G Fast and Easy Buy | Online Products Stock</title>
+            <meta
+              name="description"
+              content="Fast and Easy Online Shopping Platform"
+            />
+            <link rel="icon" href="/images/logo.png" />
+          </Head>
     <MainLayout>
     <section className="max-w-md mx-auto mt-12 p-6 border rounded shadow">
       <h1 className="text-2xl font-bold mb-4">Create a User Profile</h1>
@@ -127,6 +137,7 @@ const SignupPage: React.FC = () => {
       </form>
     </section>
     </MainLayout>
+    </>
   );
 };
 

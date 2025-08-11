@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Product } from '@/types/product';
 import { addToCart } from '@/redux/cartSlice';
 import Image from 'next/image';
+import Head from 'next/head';
 
 interface ProductCardProps {
   product: Product;
@@ -16,6 +17,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const productImage = product.primary_image; // match backend key
 
   return (
+    <>
+    <Head>
+            <title>S&G Fast and Easy Buy | Online Products Stock</title>
+            <meta
+              name="description"
+              content="Fast and Easy Online Shopping Platform"
+            />
+            <link rel="icon" href="/images/logo.png" />
+          </Head>
     <div className="bg-lightblue-200 border rounded-lg p-4 flex flex-col">
       {productImage && (
         <Image
@@ -47,6 +57,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         Add to Cart
       </button>
     </div>
+    </>
   );
 };
 

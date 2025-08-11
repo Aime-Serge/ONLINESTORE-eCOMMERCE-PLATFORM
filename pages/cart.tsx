@@ -6,6 +6,7 @@ import { RootState, AppDispatch } from '@/redux/store';
 import { clearCart } from '@/redux/cartSlice';
 import CartItem from '@/components/common/CartItem';
 import MainLayout from '@/components/layouts/MainLayout';
+import Head from 'next/head';
 
 const CartPage: React.FC = () => {
   const items = useSelector((state: RootState) => state.cart.items);
@@ -14,6 +15,15 @@ const CartPage: React.FC = () => {
   const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
+    <>
+    <Head>
+            <title>S&G Fast and Easy Buy | Online Products Stock</title>
+            <meta
+              name="description"
+              content="Fast and Easy Online Shopping Platform"
+            />
+            <link rel="icon" href="/images/logo.png" />
+          </Head>
     <MainLayout>
       <section className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-sm border border-gray-200 mt-6">
         <h1 className="text-3xl font-bold mb-6 text-gray-800">🛒 Your Cart</h1>
@@ -45,6 +55,7 @@ const CartPage: React.FC = () => {
         )}
       </section>
     </MainLayout>
+    </>
   );
 };
 

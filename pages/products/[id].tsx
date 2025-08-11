@@ -8,6 +8,7 @@ import ProductCard from '@/components/common/ProductCard';
 import SearchFilterBar from '@/components/common/SearchFilterBar';
 import Pagination from '@/components/common/Pagination';
 import Loader from '@/components/common/Loader';
+import Head from 'next/head';
 
 const ProductsPage: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -28,6 +29,15 @@ const ProductsPage: React.FC = () => {
   if (status === 'loading') return <Loader />;
 
   return (
+    <>
+    <Head>
+            <title>S&G Fast and Easy Buy | Online Products Stock</title>
+            <meta
+              name="description"
+              content="Fast and Easy Online Shopping Platform"
+            />
+            <link rel="icon" href="/images/logo.png" />
+          </Head>
     <div className="container mx-auto p-4">
       <SearchFilterBar categories={[]} onCategoryChange={(selectedCategory) => { console.log("Category changed:", selectedCategory); }} />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
@@ -41,6 +51,7 @@ const ProductsPage: React.FC = () => {
         onPageChange={(newPage: number) => console.log("Page changed:", newPage)} 
       />
     </div>
+    </>
   );
 };
 
