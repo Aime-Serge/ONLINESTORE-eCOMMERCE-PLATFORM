@@ -29,7 +29,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     <div className="bg-lightblue-200 border rounded-lg p-4 flex flex-col">
       {productImage && (
         <Image
-          src={productImage}
+          src={"https://minio.sakachris.com/product-images/products"}
           alt={product.name}
           width={400}
           height={300}
