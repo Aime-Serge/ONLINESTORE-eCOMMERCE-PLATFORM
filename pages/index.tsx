@@ -19,7 +19,7 @@ export default function Home() {
       <div className="flex flex-col min-h-screen">
         
           {/* Main Content */}
-        <main className="flex-grow px-4 py-16 max-w-5xl mx-auto bg-yellow-50 text-center rounded-lg shadow-md">
+        <main className="flex-grow justify-center items-center px-4 py-16 max-w-5xl mx-auto bg-yellow-50 text-center rounded-lg shadow-md">
           {/* Welcome Heading */}
           <h1 className="text-4xl font-extrabold text-gray-900 mb-4">
             Welcome to S&G Fast and Easy Buy
