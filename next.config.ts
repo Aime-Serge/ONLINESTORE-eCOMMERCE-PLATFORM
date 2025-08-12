@@ -17,11 +17,17 @@
 module.exports = nextConfig*/}
 // next.config.js
 /** @type {import('next').NextConfig} */
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['minio.sakachris.com'], // ✅ Allow MinIO image host
-  },
+  remotePatterns: [
+    {
+      protocol: 'https',
+      hostname: 'minio.sakachris.com',
+      pathname: '/product-images/products/**',
+    },
+  ],
+}
+
 };
 
 module.exports = nextConfig;

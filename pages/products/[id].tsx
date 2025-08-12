@@ -23,7 +23,7 @@ const ProductsPage: React.FC = () => {
       minPrice: priceRangeFilter?.min,
       maxPrice: priceRangeFilter?.max,
       search
-    }));
+    } as { page: number; categoryId?: string; minPrice?: number; maxPrice?: number; search?: string; }));
   }, [dispatch, page, categoryFilter, priceRangeFilter, search]);
 
   if (status === 'loading') return <Loader />;

@@ -8,14 +8,18 @@ import ProductCard from '../components/common/ProductCard';
 import Pagination from '../components/common/Pagination';
 import SearchFilterBar from '../components/common/SearchFilterBar';
 import Head from 'next/head';
-
 import MainLayout from '../components/layouts/MainLayout';
+
 const ProductList: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { items, status, error, totalPages, page } = useSelector((state: RootState) => state.products);
-  {/*const { categories } = useSelector((state: RootState) => state.categories);*/}
-  const categories = useSelector((state: RootState) => state.categories.categories);
 
+  const { items, status, error, totalPages, page } = useSelector(
+    (state: RootState) => state.products
+  );
+
+  const categories = useSelector(
+    (state: RootState) => state.categories.categories
+  );
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
@@ -32,32 +36,42 @@ const ProductList: React.FC = () => {
     dispatch(setPage(1)); // reset to first page on category change
   };
 
-  return ( 
+  return (
     <>
-    <Head>
-            <title>S&G Fast and Easy Buy | Online Products Stock</title>
-            <meta
-              name="description"
-              content="Fast and Easy Online Shopping Platform"
-            />
-            <link rel="icon" href="/images/logo.png" />
-          </Head>
-    <MainLayout>
-    <section className="container mx-auto p-4">
-     <SearchFilterBar categories={categories} onCategoryChange={handleCategoryChange} />
+      <Head>
+        <title>S&G Fast and Easy Buy | Online Products Stock</title>
+        <meta
+          name="description"
+          content="Fast and Easy Online Shopping Platform"
+        />
+        <link rel="icon" href="/images/logo.png" />
+      </Head>
 
-      {status === 'loading' && <p>Loading products...</p>}
-      {status === 'failed' && <p className="text-red-600">Error: {error}</p>}
+      <MainLayout>
+        <section className="container mx-auto p-4">
+          <SearchFilterBar
+            categories={categories}
+            onCategoryChange={handleCategoryChange}
+          />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
-        {(items || []).map((product) => (
-          <ProductCard key={product.product_id} product={product} />
-        ))}
-      </div>
+          {status === 'loading' && <p>Loading products...</p>}
+          {status === 'failed' && (
+            <p className="text-red-600">Error: {error}</p>
+          )}
 
-      <Pagination currentPage={page} totalPages={totalPages} onPageChange={handlePageChange} />
-    </section>
-    </MainLayout>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
+            {items.map((product) => (
+              <ProductCard key={product.product_id} product={product} />
+            ))}
+          </div>
+
+          <Pagination
+            currentPage={page}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        </section>
+      </MainLayout>
     </>
   );
 };

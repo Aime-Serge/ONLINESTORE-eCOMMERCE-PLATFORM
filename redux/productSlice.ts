@@ -2,18 +2,17 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import api from '@/services/api';
 import { Product } from '@/types/product';
 
-interface ProductState {
+interface ProductsState {
   items: Product[];
-  status: 'idle' | 'loading' | 'failed';
+  status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
   totalPages: number;
   page: number;
-  categoryFilter: string;
-  priceRangeFilter: { min: number; max: number } | null;
+  categoryFilter: string; // <-- Add this line
+  priceRangeFilter: { min: number; max: number } | null; // <-- Add if needed
   search: string;
 }
-
-const initialState: ProductState = {
+ const initialState: ProductsState = {
   items: [],
   status: 'idle',
   error: null,
@@ -24,31 +23,34 @@ const initialState: ProductState = {
   search: '',
 };
 
-export const fetchProducts = createAsyncThunk<
-  { products: Product[]; totalPages: number },
-  { page?: number; categoryId?: string; minPrice?: number; maxPrice?: number; search?: string },
-  { rejectValue: string }
->(
+// Base Minio path
+const MINIO_BASE_URL = 'https://minio.sakachris.com/product-images/products/';
+
+export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
-  async ({ page = 1, categoryId, minPrice, maxPrice, search }, { rejectWithValue }) => {
-    try {
-      const params: Record<string, string> = { page: page.toString() };
-
-      if (categoryId) params.category = categoryId;
-      if (minPrice !== undefined) params.min_price = minPrice.toString();
-      if (maxPrice !== undefined) params.max_price = maxPrice.toString();
-      if (search) params.q = search;
-
-      const response = await api.get('/products', { params });
-
-      return {
-        products: response.data.results ?? [],
-        totalPages: response.data.meta?.page_count ?? 1,
-      };
-    } catch (err: unknown) {
-      if (err instanceof Error) return rejectWithValue(err.message);
-      return rejectWithValue('Failed to fetch products');
+  async ({ page, categoryId }: { page: number; categoryId?: string }) => {
+    let endpoint = `/products?page=${page}`;
+    if (categoryId) {
+      endpoint += `&category=${categoryId}`;
     }
+
+    const response = await api.get(endpoint);
+    const data = response.data;
+
+    // Ensure every product's image is a full Minio URL
+    const mappedProducts = data.items.map((product: Product) => ({
+      ...product,
+      primary_image: product.primary_image
+        ? product.primary_image.startsWith('http')
+          ? product.primary_image // already full URL
+          : `${MINIO_BASE_URL}${product.primary_image}`
+        : '/images/placeholder.png', // fallback
+    }));
+
+    return {
+      items: mappedProducts,
+      totalPages: data.totalPages,
+    };
   }
 );
 
@@ -56,48 +58,37 @@ const productSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
-    setCategoryFilter(state, action: PayloadAction<string>) {
-      state.categoryFilter = action.payload;
-    },
-    setPriceRangeFilter(state, action: PayloadAction<{ min: number; max: number }>) {
-      state.priceRangeFilter = action.payload;
-    },
-    setSearch(state, action: PayloadAction<string>) {
-      state.search = action.payload;
-    },
-    setPage(state, action: PayloadAction<number>) {
-      state.page = action.payload;
-    },
-    clearFilters(state) {
+     clearFilters(state) {
       state.categoryFilter = '';
       state.priceRangeFilter = null;
       state.search = '';
+    },
+    setPriceRangeFilter(state, action: PayloadAction<{ min: number; max: number } | null>) {
+      state.priceRangeFilter = action.payload;
+    },
+    setCategoryFilter(state, action: PayloadAction<string>) {
+      state.categoryFilter = action.payload;
+    },
+    setPage(state, action: PayloadAction<number>) {
+      state.page = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state) => {
         state.status = 'loading';
-        state.error = null;
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
-        state.status = 'idle';
-        state.items = action.payload.products;
+        state.status = 'succeeded';
+        state.items = action.payload.items;
         state.totalPages = action.payload.totalPages;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload ?? 'Unknown error';
+        state.error = action.error.message || 'Failed to fetch products';
       });
   },
 });
 
-export const {
-  setCategoryFilter,
-  setPriceRangeFilter,
-  setSearch,
-  setPage,
-  clearFilters,
-} = productSlice.actions;
-
+export const { setPage, setCategoryFilter,clearFilters,setPriceRangeFilter } = productSlice.actions;
 export default productSlice.reducer;
