@@ -1,5 +1,5 @@
 import React from 'react';
-import Head from 'next/head';
+import Head from 'next/head'; 
 import Link from 'next/link';
 import { ShoppingCart, Package, Star } from 'lucide-react'; // E-commerce icons
 import MainLayout from '@/components/layouts/MainLayout';
