@@ -16,38 +16,46 @@
 
 module.exports = nextConfig*/}
 // next.config.js
-/** @type {import('next').NextConfig} */
 // next.config.js
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+// next.config.js
+const nextConfig: {
+  images: {
+    remotePatterns: {
+      protocol: string;
+      hostname: string;
+      pathname: string;
+      port: string;
+    }[];
+  };
+  rewrites?: () => Promise<{
+    source: string;
+    destination: string;
+  }[]>;
+} = {
   images: {
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'minio.sakachris.com',
-        // Optionally add port and pathname if needed:
-         port: '',
-         pathname: '/product-images/**',
+        pathname: '/product-images/products/**',
+        port: '',
       },
     ],
   },
 };
-
-module.exports = nextConfig;
-
+export default nextConfig;
 
 
 //changes to next.config.ts to handle API proxying
 // This configuration allows you to proxy API requests to a different server
-// without exposing the API URL in your frontend code.
-module.exports = {
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: 'https://ecom.sakachris.com/api/:path*', // Proxy to API
-      },
-    ];
-  },
+// Add API proxying configuration to nextConfig
+nextConfig.rewrites = async () => {
+  return [
+    {
+      source: '/api/:path*',
+      destination: 'https://ecom.sakachris.com/api/:path*', // Proxy to API
+    },
+  ];
 };
 
+module.exports = nextConfig;
