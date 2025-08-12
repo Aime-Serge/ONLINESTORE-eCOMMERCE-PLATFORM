@@ -17,17 +17,20 @@
 module.exports = nextConfig*/}
 // next.config.js
 /** @type {import('next').NextConfig} */
+// next.config.js
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-  remotePatterns: [
-    {
-      protocol: 'https',
-      hostname: 'minio.sakachris.com',
-      pathname: '/product-images/products/**',
-    },
-  ],
-}
-
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'minio.sakachris.com',
+        // Optionally add port and pathname if needed:
+         port: '',
+         pathname: '/product-images/**',
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;
