@@ -1,61 +1,4 @@
-'use client';
 
-{/*import React from 'react';
-import { useDispatch } from 'react-redux';
-import { removeFromCart, updateCartItem } from '@/redux/cartSlice';
-import { CartItem as CartItemType } from '@/types/cartItem';
-import Image from 'next/image';
-
-interface CartItemProps {
-  item: CartItemType;
-}
-
-const CartItem: React.FC<CartItemProps> = ({ item }) => {
-  const dispatch = useDispatch();
-
-  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newQuantity = parseInt(e.target.value, 10);
-    if (!isNaN(newQuantity) && newQuantity > 0) {
-      dispatch(updateCartItem({ cartItemId: item.id, quantity: newQuantity }));
-    }
-  };
-
-  return (
-    <div className="flex items-center justify-between border-b pb-4">
-      <div className="flex items-center gap-4">
-        <Image
-          src={item.product.image}
-          alt={item.product.name}
-          className="w-16 h-16 object-cover rounded"
-        />
-        <div>
-          <p className="font-medium">{item.product.name}</p>
-          <p className="text-sm text-gray-500">${item.price.toFixed(2)}</p>
-        </div>
-      </div>
-
-      <div className="flex items-center gap-3">
-        <input
-          type="number"
-          min="1"
-          value={item.quantity}
-          onChange={handleQuantityChange}
-          className="w-14 border rounded text-center"
-        />
-        <p className="w-20 text-right font-semibold">${item.totalPrice.toFixed(2)}</p>
-        <button
-          className="text-red-500 hover:text-red-700"
-          onClick={() => dispatch(removeFromCart(item.id))}
-        >
-          Remove
-        </button>
-      </div>
-    </div>
-  );
-};
-
-export default CartItem;
-*/}
 
 import React from 'react';
 import { useDispatch } from 'react-redux';
@@ -63,6 +6,7 @@ import { AppDispatch } from '@/redux/store';
 import { CartItem as CartItemType } from '@/types/cartItem';
 import { removeFromCart, updateCartItem } from '@/redux/cartSlice';
 import Image from 'next/image';
+import Head from 'next/head';
 
 interface CartItemProps {
   item: CartItemType;
@@ -81,6 +25,15 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
   const productPrice = Number(item.price);         // ensure numeric
 
   return (
+    <>
+    <Head>
+            <title>S&G Fast and Easy Buy | Online Products Stock</title>
+            <meta
+              name="description"
+              content="Fast and Easy Online Shopping Platform"
+            />
+            <link rel="icon" href="/images/logo.png" />
+          </Head>
     <li className="flex items-center justify-between border-b pb-4">
       {/* Product Info */}
       <div className="flex items-center gap-4">
@@ -118,6 +71,7 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
         </button>
       </div>
     </li>
+    </>
   );
 };
 

@@ -25,7 +25,7 @@ const CartPage: React.FC = () => {
             <link rel="icon" href="/images/logo.png" />
           </Head>
     <MainLayout>
-      <section className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-sm border border-gray-200 mt-6">
+      <section className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-sm border border-gray-200 mt-6 bg-[url('/images/bg-image-2.jpeg')] bg-cover bg-center">
         <h1 className="text-3xl font-bold mb-6 text-gray-800">🛒 Your Cart</h1>
 
         {items.length === 0 ? (

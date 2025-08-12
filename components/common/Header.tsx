@@ -26,7 +26,7 @@ const Header: React.FC = () => {
         role="banner"
         aria-label="Promotional offers"
       >
-        <Link href="/promotions" className="hover:underline">
+        <Link href="/signup" className="hover:underline">
           🎉 Free shipping on orders over $50 · Sign up for 10% off your first order!
         </Link>
       </div>
@@ -43,9 +43,6 @@ const Header: React.FC = () => {
               height={60}
               className="rounded-full"
             />
-            <span className="font-bold text-lg text-gray-800 hidden sm:inline-block">
-              S&G Buy
-            </span>
           </Link>
 
           {/* Search Bar - Desktop */}
@@ -73,7 +70,7 @@ const Header: React.FC = () => {
             {[
               { href: '/', label: 'Home' },
               { href: '/ProductList', label: 'Products' },
-              { href: '/orders', label: 'Orders' }
+              { href: '#', label: 'Orders' }
             ].map((item) => (
               <Link
                 key={item.href}

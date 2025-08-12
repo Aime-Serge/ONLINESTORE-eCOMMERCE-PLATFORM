@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import api from '@/services/api';
 import { Product } from '@/types/product';
+import { setTotalCount } from './paginationSlice'; // ✅ Import pagination action
+import { AppDispatch } from './store';
 
 interface ProductState {
   items: Product[];
@@ -25,15 +27,14 @@ const initialState: ProductState = {
 };
 
 export const fetchProducts = createAsyncThunk<
-  { products: Product[]; totalPages: number },
+  { products: Product[]; totalPages: number; totalCount: number },
   { page?: number; categoryId?: string; minPrice?: number; maxPrice?: number; search?: string },
-  { rejectValue: string }
+  { dispatch: AppDispatch; rejectValue: string }
 >(
   'products/fetchProducts',
-  async ({ page = 1, categoryId, minPrice, maxPrice, search }, { rejectWithValue }) => {
+  async ({ page = 1, categoryId, minPrice, maxPrice, search }, { dispatch, rejectWithValue }) => {
     try {
       const params: Record<string, string> = { page: page.toString() };
-
       if (categoryId) params.category = categoryId;
       if (minPrice !== undefined) params.min_price = minPrice.toString();
       if (maxPrice !== undefined) params.max_price = maxPrice.toString();
@@ -41,9 +42,16 @@ export const fetchProducts = createAsyncThunk<
 
       const response = await api.get('/products', { params });
 
+      const totalCount = response.data.meta?.total_count ?? 0;
+      const totalPages = response.data.meta?.page_count ?? 1;
+
+      // ✅ Sync totalCount to paginationSlice
+      dispatch(setTotalCount(totalCount));
+
       return {
         products: response.data.results ?? [],
-        totalPages: response.data.meta?.page_count ?? 1,
+        totalPages,
+        totalCount,
       };
     } catch (err: unknown) {
       if (err instanceof Error) return rejectWithValue(err.message);

@@ -8,7 +8,7 @@ interface PaginationState {
 
 const initialState: PaginationState = {
   currentPage: 1,
-  pageSize: 12, // You can adjust this as needed
+  pageSize: 12, // Default number of products per page
   totalCount: 0,
 };
 
@@ -33,12 +33,5 @@ const paginationSlice = createSlice({
   },
 });
 
-export const {
-  setCurrentPage,
-  setPageSize,
-  setTotalCount,
-  resetPagination,
-} = paginationSlice.actions;
-
+export const { setCurrentPage, setPageSize, setTotalCount, resetPagination } = paginationSlice.actions;
 export default paginationSlice.reducer;
-// This file defines the pagination slice for managing pagination state in a Redux store.

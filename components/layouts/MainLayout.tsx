@@ -15,7 +15,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
       <Header />
 
       {/* Main content */}
-      <main className="flex-grow">
+      <main className="flex-grow justify-center items-center">
         {children}
       </main>
 

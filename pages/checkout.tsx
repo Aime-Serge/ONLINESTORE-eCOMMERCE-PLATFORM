@@ -35,7 +35,7 @@ const CheckoutPage: React.FC = () => {
             <link rel="icon" href="/images/logo.png" />
           </Head>
     <MainLayout>
-    <section className="max-w-3xl mx-auto p-4">
+    <section className="max-w-3xl mx-auto p-4 bg-[url('/images/bg-image-7.jpeg bg-cover')]">
       <h1 className="text-3xl font-bold mb-6">Checkout</h1>
 
       {cartItems.length === 0 ? (

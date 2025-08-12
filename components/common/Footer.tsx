@@ -6,7 +6,7 @@ import Link from 'next/link';
 const Footer: React.FC = () => {
   return (
     <footer className="bg-gray-100 border-t mt-8">
-      <div className="container mx-auto px-4 py-6 text-center text-gray-600">
+      <div className="container mx-auto px-4 py-2 text-center text-gray-600">
         <p className="mb-2">
           &copy; {new Date().getFullYear()} MyStore. All rights reserved.
         </p>
