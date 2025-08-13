@@ -70,7 +70,8 @@ const Header: React.FC = () => {
             {[
               { href: '/', label: 'Home' },
               { href: '/ProductList', label: 'Products' },
-              { href: '#', label: 'Orders' }
+              { href: '#', label: 'Orders' },
+              { href: '/contact', label: 'Contact'}
             ].map((item) => (
               <Link
                 key={item.href}
@@ -94,6 +95,9 @@ const Header: React.FC = () => {
               <PackageSearch size={22} aria-hidden="true" />
             </Link>
             <Link href="/login" className="text-gray-700 hover:text-black" aria-label="Login">
+              <User size={22} aria-hidden="true" />
+            </Link>
+            <Link href="/contact" className="text-gray-700 hover:text-black" aria-label="Contact">
               <User size={22} aria-hidden="true" />
             </Link>
           </div>
@@ -146,6 +150,7 @@ const Header: React.FC = () => {
                 { href: '/orders', label: 'Orders' },
                 { href: '/cart', label: 'Cart' },
                 { href: '/checkout', label: 'Checkout' },
+                { href: '/contact', label: 'Contact'},
                 { href: '/login', label: 'Login' }
               ].map((item) => (
                 <Link
