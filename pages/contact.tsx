@@ -64,6 +64,7 @@ export default function ContactPage() {
           <div className="flex flex-col items-center text-center bg-white p-6 rounded-lg shadow-md">
             <FaMapMarkerAlt className="text-blue-600 text-2xl mb-2" />
             <h3 className="font-semibold">Address</h3>
+            <p className="text-gray-500">KG 391 street, Kigali,Rwanda</p>
             <p className="text-gray-500">123 Market Street, Nairobi, Kenya</p>
           </div>
           <div className="flex flex-col items-center text-center bg-white p-6 rounded-lg shadow-md">
@@ -77,7 +78,7 @@ export default function ContactPage() {
             <FaPhone className="text-blue-600 text-2xl mb-2" />
             <h3 className="font-semibold">Phone</h3>
             <p className="text-gray-500">
-              <a href="tel:+254700123456" className="hover:underline">+254 700 123 456</a>
+              <a href="tel:+250792957513|+254700123456" className="hover:underline">+250792957513|+254 700 123 456</a>
             </p>
           </div>
           <div className="flex flex-col items-center text-center bg-white p-6 rounded-lg shadow-md">
