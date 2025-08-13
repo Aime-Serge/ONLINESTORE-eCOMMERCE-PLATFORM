@@ -7,6 +7,7 @@ import { clearCart } from '@/redux/cartSlice';
 import CartItem from '@/components/common/CartItem';
 import MainLayout from '@/components/layouts/MainLayout';
 import Head from 'next/head';
+import Link from 'next/link';
 
 const CartPage: React.FC = () => {
   const items = useSelector((state: RootState) => state.cart.items);
@@ -25,7 +26,7 @@ const CartPage: React.FC = () => {
             <link rel="icon" href="/images/logo.png" />
           </Head>
     <MainLayout>
-      <section className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-sm border border-gray-200 mt-6 bg-[url('/images/bg-image-2.jpeg')] bg-cover bg-center">
+      <section className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-sm border border-gray-200 mt-6 bg-cover bg-center">
         <h1 className="text-3xl font-bold mb-6 text-gray-800">🛒 Your Cart</h1>
 
         {items.length === 0 ? (
@@ -44,6 +45,16 @@ const CartPage: React.FC = () => {
               <p className="text-xl font-semibold text-gray-800">
                 Total: <span className="text-green-600">${total.toFixed(2)}</span>
               </p>
+              <Link href="/checkout">
+              <button className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg transition-colors duration-200"            >
+                Pay Now
+              </button>
+              </Link>
+              <Link href="/ProductList">
+           <button className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg transition-colors duration-200">
+              Add more items
+              </button>
+              </Link>
               <button
                 onClick={() => dispatch(clearCart())}
                 className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg transition-colors duration-200"
@@ -51,7 +62,7 @@ const CartPage: React.FC = () => {
                 Clear Cart
               </button>
             </div>
-          </>
+            </>
         )}
       </section>
     </MainLayout>
