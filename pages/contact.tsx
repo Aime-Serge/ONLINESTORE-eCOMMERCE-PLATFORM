@@ -48,7 +48,8 @@ export default function ContactPage() {
     <>
       <Head>
         <title>Contact Us | S&G Fast and Easy Buy</title>
-        <meta name="description" content="Get in touch with S&G Fast and Easy Buy. We're here to help you with your shopping needs." />
+        <meta name="description" content="Fast and Easy Online Shopping Platform; Get in touch with S&G Fast and Easy Buy. We're here to help you with your shopping needs." />
+        <link rel="icon" href="/images/logo.png" />
       </Head>
       <MainLayout>
       <div className="max-w-6xl mx-auto px-4 py-12">
