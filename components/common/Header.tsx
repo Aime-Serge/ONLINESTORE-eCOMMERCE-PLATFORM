@@ -97,9 +97,7 @@ const Header: React.FC = () => {
             <Link href="/login" className="text-gray-700 hover:text-black" aria-label="Login">
               <User size={22} aria-hidden="true" />
             </Link>
-            <Link href="/contact" className="text-gray-700 hover:text-black" aria-label="Contact">
-              <User size={22} aria-hidden="true" />
-            </Link>
+            
           </div>
 
           {/* Mobile Menu Button */}
